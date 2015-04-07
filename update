@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # FIXME submodule recursion
-echo "Work in progress. Exiting..."
-exit 1
+# https://github.com/tmux-plugins/tmux-test/issues/1
 
 echo "Updating tmux environment..."
 git pull --rebase --recurse-submodules origin master
