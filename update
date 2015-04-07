@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# FIXME submodule recursion
+echo "Work in progress. Exiting..."
+exit 1
+
+echo "Updating tmux environment..."
+git pull --rebase --recurse-submodules origin master
+git submodule update --recursive --init
+
+echo "Validating update..."
+if [[ $(git submodule foreach git branch | grep "*") == *master* ]]; then
+  echo "Update valid, no corruption detected."
+else
+  echo "Update corrupt, trying to rescue..."
+  git submodule foreach git checkout master
+fi
+
+echo "Checking status..."
+git status
+
+echo "Update completed! Please commit possible changes if any."
